@@ -5,7 +5,6 @@ body {
     margin: 0;
 }
 
-
 header {
     display: flex;
     flex-direction: row;
@@ -47,4 +46,22 @@ h1 {
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.photographer_section article .photographer-title {
+    margin: 0;
+}
+.photographer_section article .description {
+    margin: 10px;
+}
+
+.photographer_section article .photographer-price {
+    color: grey;
+}
+
+.photographer_section article .photographer-location {
+    color: #D3573C;
+    margin: 0;
 }
