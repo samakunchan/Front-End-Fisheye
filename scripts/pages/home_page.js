@@ -15,7 +15,7 @@ export class HomePage {
     async init() {
         const exempleJSON = await new PhotographerRepositoryFactory(fakeTypeText);
         const remoteJSON =  await new PhotographerRepositoryFactory(realTypeText);
-        // const testJSON =  await new PhotographerRepositoryFactory(realTypeText, 930);
+
         if(typeof remoteJSON === typeStringText && remoteJSON === errorMessage) {
             const fakePhotographers = exempleJSON['photographers'].map(PhotographerFactory.mapWithFakeModelFactory);
             this.displayData(fakePhotographers);

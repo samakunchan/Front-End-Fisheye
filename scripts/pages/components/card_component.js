@@ -30,11 +30,11 @@ export class CardComponent {
     getArticle() {
         const article = document.createElement( 'article');
 
-        const img = this._getImage();
-        const h2 = this._getTitle();
-        const paraLocation = this._getLocation();
-        const paraDescription = this._getDescription();
-        const small = this._getPrice();
+        const img = this.getImage();
+        const h2 = this.getTitle();
+        const paraLocation = this.getLocation();
+        const paraDescription = this.getDescription();
+        const small = this.getPrice();
 
         article.appendChild(img);
         article.appendChild(h2);
@@ -52,14 +52,27 @@ export class CardComponent {
         return article;
     }
 
+    getUserInfo() {
+        const article = document.createElement( 'article');
+        const h2 = this.getTitle();
+        const paraLocation = this.getLocation();
+        const paraDescription = this.getDescription();
+
+        article.appendChild(h2);
+        article.appendChild(paraLocation);
+        article.appendChild(paraDescription);
+
+        return article;
+    }
+
     /**
      * Créer l'image en HTML
      * @return {HTMLImageElement}
-     * @private
      */
-    _getImage() {
-        const img = document.createElement( 'img' );
+    getImage() {
+        const img = document.createElement( 'img');
         img.setAttribute('src', this._picture);
+        img.setAttribute('alt', `Image de ${this._name}`);
 
         return img;
     }
@@ -67,9 +80,8 @@ export class CardComponent {
     /**
      * Créer le titre en HTML
      * @return {HTMLHeadingElement}
-     * @private
      */
-    _getTitle() {
+    getTitle() {
         const h2 = document.createElement( 'h2' );
         h2.textContent = this._name;
         h2.classList.add('photographer-title');
@@ -80,9 +92,8 @@ export class CardComponent {
     /**
      * Créer un paragraphe de description
      * @return {HTMLParagraphElement}
-     * @private
      */
-    _getLocation() {
+    getLocation() {
         const para = document.createElement( 'p' );
         para.textContent = this._location;
         para.classList.add('photographer-location');
@@ -93,9 +104,8 @@ export class CardComponent {
     /**
      * Créer un paragraphe de description
      * @return {HTMLParagraphElement}
-     * @private
      */
-    _getDescription() {
+    getDescription() {
         const para = document.createElement( 'p' );
         para.textContent = this._tagline;
         para.classList.add('photographer-description');
@@ -106,14 +116,14 @@ export class CardComponent {
     /**
      * Créer une balise small pour afficher le prix
      * @return {HTMLElement}
-     * @private
      */
-    _getPrice() {
+    getPrice() {
         const small = document.createElement( 'small' );
         small.textContent = this._price;
         small.classList.add('photographer-price');
 
         return small;
     }
+
 
 }
