@@ -1,8 +1,6 @@
 export class ContactComponent {
     constructor(name = null) {
         if(name !== null) {
-            console.log('ok');
-            console.log(document.querySelector('.text-header-modal').textContent);
             const oldText = document.querySelector('.text-header-modal').textContent;
             const newText = `${oldText} \n${name}`;
             document.querySelector('.text-header-modal').innerText = '';
