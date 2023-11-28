@@ -1,5 +1,5 @@
 export class PhotographerModel {
-    constructor({name, id, city, country, tagline, price, portrait}) {
+    constructor({name, id, city, country, tagline, price, portrait, medias}) {
         this._name = name;
         this._id = id;
         this._city = city;
@@ -7,6 +7,7 @@ export class PhotographerModel {
         this._tagline = tagline;
         this._price = price;
         this._portrait = portrait;
+        this._medias = medias;
     }
 
     get id () {
@@ -31,5 +32,9 @@ export class PhotographerModel {
 
     get location () {
         return `${this._country}/${this._city}`;
+    }
+
+    get medias () {
+        return this._medias;
     }
 }

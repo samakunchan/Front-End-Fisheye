@@ -1,46 +1,32 @@
-import { getJson, getError, errorMessage, typeStringText, typeObjectText, errorInitMessage } from '../utils/utils.js';
-import { PhotographerFactory } from '../factories/photographer_factory.js';
+import { errorMessage, typeStringText, typeObjectText, errorInitMessage, fakeTypeText, realTypeText } from '../utils/utils.js';
+import { PhotographerFactory } from '../core/factories/photographer_factory.js';
 import { PhotographersService } from '../services/photographers_service.js';
+import { PhotographerRepositoryFactory } from '../core/factories/photographer_repository_factory.js';
 
-export class App {
+export class HomePage {
     constructor() {
         this.init().catch(console.log);
     }
 
     /**
-     * Initialisation de l'App
+     * Initialisation de l'Home
      * @return {Promise<FakePhotographerModel | PhotographerModel | Error>}
      */
     async init() {
-        const exempleJSON = await this.getFakePhotographers();
-        const remoteJSON = await this.getRemotePhotographers();
+        const exempleJSON = await new PhotographerRepositoryFactory(fakeTypeText);
+        const remoteJSON =  await new PhotographerRepositoryFactory(realTypeText);
+        // const testJSON =  await new PhotographerRepositoryFactory(realTypeText, 930);
         if(typeof remoteJSON === typeStringText && remoteJSON === errorMessage) {
             const fakePhotographers = exempleJSON['photographers'].map(PhotographerFactory.mapWithFakeModelFactory);
             this.displayData(fakePhotographers);
             return fakePhotographers;
         } else if(typeof remoteJSON === typeObjectText) {
-            const realPhotographers = remoteJSON['photographers'].map(PhotographerFactory.mapWithFakeRealFactory);
+            const realPhotographers = remoteJSON['photographers'].map(PhotographerFactory.mapWithRealModelFactory);
             this.displayData(realPhotographers);
             return realPhotographers;
         } else {
             throw errorInitMessage;
         }
-    }
-
-    /**
-     * Fake Datas
-     * @return {Promise<Response | String>}
-     */
-    async getFakePhotographers() {
-        return await fetch('data/fake-photographers.json').then(getJson).catch(getError);
-    }
-
-    /**
-     * Real Datas
-     * @return {Promise<Response | String>}
-     */
-    async getRemotePhotographers() {
-        return await fetch('data/photoographers.json').then(getJson).catch(getError);
     }
 
     /**
@@ -62,3 +48,4 @@ export class App {
     }
 }
 
+new HomePage();
