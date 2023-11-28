@@ -1,6 +1,6 @@
 import { redirectToThisUrl } from '../../utils/utils.js';
 
-export class CardComponent {
+export class PhotographCardComponent {
     constructor(data) {
         const { id, name, portrait, tagline, price, location } = data;
         this._id = id;

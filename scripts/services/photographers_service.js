@@ -1,11 +1,10 @@
-import { CardComponent } from '../pages/components/card_component.js';
+import { PhotographCardComponent } from '../pages/components/photograph_card_component.js';
 import { ContactComponent } from '../pages/components/contact_component.js';
 
 export class PhotographersService {
     constructor(data) {
         this._data = data;
-        this._card = new CardComponent(this._data);
-        this._contact = new ContactComponent(this._data.name);
+        this._card = new PhotographCardComponent(this._data);
     }
 
     photographerTemplate() {
@@ -28,6 +27,7 @@ export class PhotographersService {
     }
 
     _getSectionHeaderDOM() {
+        this._contact = new ContactComponent(this._data.name);
         const section = document.createElement('section');
         section.classList.add('photograph-header')
         const userInfo = this._card.getUserInfo();
