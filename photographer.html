@@ -11,16 +11,12 @@
     <header>
       <img src="assets/images/logo.png" class="logo" alt="fisheye logo">
     </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button id="openModal" class="contact_button">Contactez-moi</button>
-      </div>
-    </main>
+    <main id="main"></main>
     <!-- Modal Formulaire de contact -->
-    <div id="contact_modal">
+    <div id="contactModal">
 			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
+				<header class="header-modal">
+          <h2 class="text-header-modal">Contactez-moi</h2>
           <img id="closeModal" src="assets/icons/close.svg" alt="Image d'une croix pour fermer le popup">
         </header>
 				<form>
@@ -28,12 +24,23 @@
 						<label for="firstname">Prénom</label>
 						<input id="firstname" name="firstname">
 					</div>
+          <div>
+            <label for="lastname">Nom</label>
+            <input id="lastname" name="lastname">
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input id="email" name="email">
+          </div>
+          <div>
+            <label for="message">Votre message</label>
+            <input id="message" name="message">
+          </div>
           <button class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
     <!-- End Modal Formulaire de contact -->
     <script type="module" src="scripts/pages/photographer_page.js"></script>
-    <script type="module" src="scripts/utils/contactForm.js"></script>
   </body>
 </html>

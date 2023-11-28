@@ -31,7 +31,7 @@ export class PhotographerModel {
     }
 
     get location () {
-        return `${this._country}/${this._city}`;
+        return `${this._city}, ${this._country}`;
     }
 
     get medias () {
