@@ -6,6 +6,25 @@ export const fakeTypeText = `fake`;
 export const realTypeText = `real`;
 export const realOneTypeText = `one`;
 
+/**
+ * Enums
+ * @type {{date: {value: string, key: string}, title: {value: string, key: string}, popular: {value: string, key: string}}}
+ */
+export const SortBy = {
+    popular: {
+        key: 'popular',
+        value: 'popularité'
+    },
+    title: {
+        key: 'title',
+        value: 'titre'
+    },
+    date: {
+        key: 'date',
+        value: 'date'
+    },
+}
+
 export const getJson = data => data.json();
 export const getError = () => errorMessage;
 // export const getError = console.log;
