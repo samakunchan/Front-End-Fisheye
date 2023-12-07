@@ -64,11 +64,13 @@ export class PhotographerPage {
             const onePhotographer = PhotographerFactory.getOneWithRealModelFactory(oneJSON);
             this.displayMediasData(onePhotographer);
         });
+        photographerTemplate.getCounterDOM();
     }
 
     addToNodesMedia(media) {
         const photographerTemplate = new PhotographersService(media).photographerTemplate();
         const photographerMedias = photographerTemplate.getMediasDOM();
+        console.log('voila');
         document.getElementById('main').appendChild(photographerMedias);
     }
 }
