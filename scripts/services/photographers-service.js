@@ -8,7 +8,11 @@ export class PhotographersService {
         this._data = data;
         this._card = new PhotographCardComponent(this._data);
         if(this._data.medias !== undefined) {
-            const media = this._data.medias.map(media => new MediaFactory({...media, name: this._data.name}));
+            const media = this._data.medias.map(media => new MediaFactory({
+                ...media,
+                name: this._data.name,
+                price: this._data.price
+            }));
             this._resultMedias = new MediasCardComponent(media);
         }
     }
@@ -18,6 +22,7 @@ export class PhotographersService {
             getUserCardDOM: () => this._getUserCardDOM(),
             getSectionHeaderDOM: () => this._getSectionHeaderDOM(),
             getMediasDOM: () => this._getMediasDOM(),
+            getCounterDOM: () => this._getCounterDOM(),
         };
     }
 
@@ -55,5 +60,9 @@ export class PhotographersService {
         section.appendChild(label);
 
         return section;
+    }
+
+    _getCounterDOM() {
+        return this._resultMedias.getCounterLikes();
     }
 }

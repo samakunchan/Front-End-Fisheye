@@ -40,6 +40,7 @@ export class PhotographerPage {
     displayMediasData(photographer) {
         this.addToNodesMedia(photographer);
     }
+
     /**
      * Méthode exécuter à chaque itération de la boucle forEach() de la méthode displayData()
      * @param photographer
@@ -48,11 +49,13 @@ export class PhotographerPage {
         const photographerTemplate = new PhotographersService(photographer).photographerTemplate();
         const photographerHeader = photographerTemplate.getSectionHeaderDOM();
         const photographerMedias = photographerTemplate.getMediasDOM();
+        const photographerTotalLikes = photographerTemplate.getCounterDOM();
         document.getElementById('main').insertBefore(
             photographerHeader,
             document.querySelector('.photograph-filters')
         );
         document.getElementById('main').appendChild(photographerMedias);
+        document.getElementById('main').appendChild(photographerTotalLikes);
 
         this._contact.listenModal();
         document.querySelector('.select-filter').addEventListener('change', async event => {

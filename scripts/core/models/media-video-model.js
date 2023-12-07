@@ -20,4 +20,17 @@ export class MediaVideoModel extends AbstractMediaModel {
     get alt() {
         return `Video de ${this._title}`;
     }
+
+    toJson() {
+        return {
+            date: this.date,
+            id: this.id,
+            likes: this.likes,
+            name: this.name,
+            photographerId: this.photographerId,
+            price: this.price,
+            title: this.title,
+            video: this.video,
+        }
+    }
 }

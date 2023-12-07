@@ -31,6 +31,19 @@ export class AbstractMediaModel {
         return this._title;
     }
 
+
+    /**
+     *
+     * @param likes
+     * @return {number}
+     */
+    set likes(likes) {
+        return this._likes = likes;
+    }
+
+    /**
+     * @return {number}
+     */
     get likes() {
         return this._likes;
     }
