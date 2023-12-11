@@ -24,36 +24,6 @@ export class MediasCardComponent {
             blockLikes.appendChild(likes);
             blockLikes.appendChild(heart);
 
-            blockLikes.addEventListener('click', () => {
-                document.querySelector('.block-counter').removeChild(document.querySelector('.like-heart'));
-                document.querySelector('.block-counter').removeChild(document.querySelector('.price'));
-
-                const testLikes = this._medias.find((data, index ) => index === indexMedia);
-                testLikes.likes++;
-
-                const totalLikes = this._medias
-                    .map(data => data.likes)
-                    .reduce((a, b) => a + b, 0);
-
-                const heartR = document.createElement('i');
-                heartR.setAttribute('class', 'fas fa-heart fa-solid');
-
-                const likesR = document.createElement('small');
-                likesR.textContent = totalLikes;
-
-                const price = document.createElement('small');
-                price.classList.add('price');
-                price.textContent = this._medias.find(media => media.price).price;
-
-                const blockLikes = document.createElement('div');
-                blockLikes.classList.add('like-heart');
-                blockLikes.appendChild(likesR);
-                blockLikes.appendChild(heartR);
-                document.querySelector('.block-counter').appendChild(blockLikes);
-                document.querySelector('.block-counter').appendChild(price);
-                const newLikes = this._medias.find((data, index ) => index === indexMedia);
-                document.querySelector(`.like-${indexMedia}`).innerText = `${newLikes.likes}`;
-            });
 
             const nodeMedia = media instanceof MediaVideoModel ?
                 document.createElement('video') :
@@ -107,6 +77,37 @@ export class MediasCardComponent {
         blockCounter.appendChild(price);
 
         return blockCounter;
+    }
+
+    _updateCounter(indexMedia) {
+        document.querySelector('.block-counter').removeChild(document.querySelector('.like-heart'));
+        document.querySelector('.block-counter').removeChild(document.querySelector('.price'));
+
+        const testLikes = this._medias.find((data, index ) => index === indexMedia);
+        testLikes.likes++;
+
+        const totalLikes = this._medias
+            .map(data => data.likes)
+            .reduce((a, b) => a + b, 0);
+
+        const heartR = document.createElement('i');
+        heartR.setAttribute('class', 'fas fa-heart fa-solid');
+
+        const likesR = document.createElement('small');
+        likesR.textContent = totalLikes;
+
+        const price = document.createElement('small');
+        price.classList.add('price');
+        price.textContent = this._medias.find(media => media.price).price;
+
+        const blockLikes = document.createElement('div');
+        blockLikes.classList.add('like-heart');
+        blockLikes.appendChild(likesR);
+        blockLikes.appendChild(heartR);
+        document.querySelector('.block-counter').appendChild(blockLikes);
+        document.querySelector('.block-counter').appendChild(price);
+        const newLikes = this._medias.find((data, index ) => index === indexMedia);
+        document.querySelector(`.like-${indexMedia}`).innerText = `${newLikes.likes}`;
     }
 }
 

@@ -64,7 +64,6 @@ export class PhotographerPage {
             const onePhotographer = PhotographerFactory.getOneWithRealModelFactory(oneJSON);
             this.displayMediasData(onePhotographer);
         });
-        photographerTemplate.getCounterDOM();
     }
 
     addToNodesMedia(media) {
