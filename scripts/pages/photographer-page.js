@@ -50,12 +50,15 @@ export class PhotographerPage {
         const photographerHeader = photographerTemplate.getSectionHeaderDOM();
         const photographerMedias = photographerTemplate.getMediasDOM();
         const photographerTotalLikes = photographerTemplate.getCounterDOM();
+        const photographerCaroussel = photographerTemplate.getCarousselDOM();
+
         document.getElementById('main').insertBefore(
             photographerHeader,
             document.querySelector('.photograph-filters')
         );
         document.getElementById('main').appendChild(photographerMedias);
         document.getElementById('main').appendChild(photographerTotalLikes);
+        document.getElementById('main').appendChild(photographerCaroussel);
 
         this._contact.listenModal();
         document.querySelector('.select-filter').addEventListener('change', async event => {
@@ -69,6 +72,7 @@ export class PhotographerPage {
     addToNodesMedia(media) {
         const photographerTemplate = new PhotographersService(media).photographerTemplate();
         const photographerMedias = photographerTemplate.getMediasDOM();
+        console.log('voila');
         document.getElementById('main').appendChild(photographerMedias);
     }
 }

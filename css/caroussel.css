@@ -1,0 +1,87 @@
+.bloc-caroussel {
+    position: fixed;
+    width: 100dvw;
+    height: 100dvh;
+    z-index: 2;
+    top: 0;
+    background-color: var(--tertiary-bg-color);
+}
+
+.hide-caroussel {
+    display: none;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: .5em;
+    cursor: pointer;
+    font-size: 4em;
+    color: var(--primary-color);
+}
+
+.image-caroussel {
+    width: 100%;
+    object-fit: contain;
+    height: 80%;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.item video, .item img {
+    cursor: pointer;
+}
+
+.bloc-buttons {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    top: 50%;
+    font-size: 4em;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+.previous, .next {
+    margin: 0 20px;
+
+}
+
+.block-image-and-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    width: 100%;
+    font-size: 2em;
+    margin: 10px 0;
+    color: var(--primary-color);
+}
+
+.block-media {
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.block-media, .block-para-title {
+    width: 85%;
+}
+
+.block-para-title {
+    position: absolute;
+    bottom: 20px;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
