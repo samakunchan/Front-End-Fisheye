@@ -1,7 +1,8 @@
 import { PhotographCardComponent } from '../pages/components/photograph-card-component.js';
 import { ContactComponent } from '../pages/components/contact-component.js';
 import { MediasCardComponent } from '../pages/components/medias-card-component.js';
-import {MediaFactory} from '../core/factories/media-factory.js';
+import { MediaFactory } from '../core/factories/media-factory.js';
+import { CarousselComponent } from '../pages/components/caroussel-component.js';
 
 export class PhotographersService {
     constructor(data) {
@@ -15,6 +16,7 @@ export class PhotographersService {
             }));
             this._resultMedias = new MediasCardComponent(media);
         }
+        this._caroussel = new CarousselComponent();
     }
 
     photographerTemplate() {
@@ -23,6 +25,7 @@ export class PhotographersService {
             getSectionHeaderDOM: () => this._getSectionHeaderDOM(),
             getMediasDOM: () => this._getMediasDOM(),
             getCounterDOM: () => this._getCounterDOM(),
+            getCarousselDOM: () => this._getCarousselDOM(),
         };
     }
 
@@ -64,5 +67,9 @@ export class PhotographersService {
 
     _getCounterDOM() {
         return this._resultMedias.getCounterLikes();
+    }
+
+    _getCarousselDOM() {
+        return this._caroussel.buildCaroussel();
     }
 }

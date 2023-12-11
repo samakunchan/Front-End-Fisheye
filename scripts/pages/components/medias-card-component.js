@@ -1,4 +1,5 @@
 import { MediaVideoModel } from '../../core/models/media-video-model.js';
+import { CarousselComponent } from './caroussel-component.js';
 
 export class MediasCardComponent {
     constructor(medias) {
@@ -46,6 +47,10 @@ export class MediasCardComponent {
             li.appendChild(item);
             ul.appendChild(li);
 
+            const caroussel = new CarousselComponent(indexMedia, this._medias);
+
+            blockLikes.addEventListener('click',() => this._updateCounter(indexMedia));
+            nodeMedia.addEventListener('click',() => caroussel.showCaroussel(indexMedia, this._medias));
         })
 
         return ul;
