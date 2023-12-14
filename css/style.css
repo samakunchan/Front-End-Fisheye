@@ -1,5 +1,6 @@
 @import url('photographer.css');
 @import url('caroussel.css');
+@import url('select.css');
 
 :root {
     --primary-color: #901C1C;
@@ -9,6 +10,7 @@
     --tertiary-text-color: #525252;
     --tertiary-bg-color: #FAFAFA;
     --font-family: 'DM Sans', sans-serif;
+    --timing: .3s;
 }
 
 body {

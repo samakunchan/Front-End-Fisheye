@@ -1,0 +1,82 @@
+.photograph-filters {
+    display: flex;
+    width: 270px;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.custom-select {
+    position: relative;
+    font-family: Arial, sans-serif;
+    width: 170px;
+    appearance: none;
+    margin-left: 20px;
+}
+
+.custom-select select {
+    display: none;
+}
+
+.select-selected {
+    background-color: #901C1C;
+    padding-left: 5% !important;
+    border-radius: 5px;
+    appearance: none;
+    background-image: url("../../assets/icons/selectArrow.png");
+    background-repeat: no-repeat, repeat;
+    background-position: right 0.7em top 50%, 0 0;
+    background-size: auto, 100%;
+}
+
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+
+.select-items div, .select-selected {
+    color: #ffffff;
+    padding: 14px 0;
+    cursor: pointer;
+    user-select: none;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.select-items div {
+    width: 90%;
+    margin: auto;
+    border-top: 1px solid #ffffff;
+}
+
+.select-items {
+    position: absolute;
+    background-color: #901C1C;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.select-hide, .hidden {
+    display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.show-arrows {
+    background: url('../../assets/icons/selectArrow.png');
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.hide-arrows {
+    background: url('../../assets/icons/selectArrow_opened.png');
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
