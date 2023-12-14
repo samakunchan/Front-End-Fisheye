@@ -147,8 +147,8 @@ export class FiltersService {
      */
     handleBackGround() {
         const selectInp = document.getElementsByClassName('select-selected')[0];
-        const backgroundImageOpen = `url('/assets/icons/arrow-up.svg')`;
-        const backgroundImageClose = `url('/assets/icons/arrow-down.svg')`;
+        const backgroundImageOpen = `url("${window.location.protocol}//${window.location.host}/${window.location.pathname.split('/')[1]}/assets/icons/arrow-up.svg")`;
+        const backgroundImageClose = `url("${window.location.protocol}//${window.location.host}/${window.location.pathname.split('/')[1]}/assets/icons/arrow-down.svg")`;
 
         if (selectInp.style.backgroundImage === backgroundImageOpen) {
             selectInp.style.backgroundImage = backgroundImageClose;
