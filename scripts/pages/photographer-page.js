@@ -37,10 +37,6 @@ export class PhotographerPage {
         this.addToTemplate(photographer);
     }
 
-    displayMediasData(photographer) {
-        this.addToNodesMedia(photographer);
-    }
-
     /**
      * Méthode exécuter à chaque itération de la boucle forEach() de la méthode displayData()
      * @param photographer
@@ -61,20 +57,11 @@ export class PhotographerPage {
         document.getElementById('main').appendChild(photographerCaroussel);
 
         this._contact.listenModal();
-        document.querySelector('.select-filter').addEventListener('change', async event => {
-            document.getElementById('main').removeChild(document.querySelector('.photograph-results'));
-            const oneJSON =  await new PhotographerRepositoryFactory(realTypeText, idParam, event.target.value);
-            const onePhotographer = PhotographerFactory.getOneWithRealModelFactory(oneJSON);
-            this.displayMediasData(onePhotographer);
-        });
+        photographerTemplate.getFilterDOM();
     }
 
-    addToNodesMedia(media) {
-        const photographerTemplate = new PhotographersService(media).photographerTemplate();
-        const photographerMedias = photographerTemplate.getMediasDOM();
-        console.log('voila');
-        document.getElementById('main').appendChild(photographerMedias);
-    }
+
+
 }
 
 new PhotographerPage();

@@ -18,16 +18,19 @@
       <img src="assets/images/logo.png" class="logo" alt="fisheye logo">
     </header>
     <main id="main">
+      <!-- Filtre -->
       <section class="photograph-filters">
-        <label class="label-filter-by" for="filterBy">Trier par</label>
-        <div>
-          <select id="filterBy" class="select-filter">
+        <label for="filterBy" class="labelFilterBy">Trier par</label>
+        <div aria-label="Selection des filtres" class="custom-select">
+          <select aria-expanded="false" name="filterBy" id="filterBy">
             <option value="popular">Popularité</option>
-            <option value="title">Titre</option>
             <option value="date">Date</option>
+            <option value="title">Titre</option>
           </select>
         </div>
       </section>
+      <!-- End Filtre -->
+
     </main>
     <!-- Modal Formulaire de contact -->
     <div id="contactModal">

@@ -3,6 +3,7 @@ import { ContactComponent } from '../pages/components/contact-component.js';
 import { MediasCardComponent } from '../pages/components/medias-card-component.js';
 import { MediaFactory } from '../core/factories/media-factory.js';
 import { CarousselComponent } from '../pages/components/caroussel-component.js';
+import {FiltersService} from './filters-service.js';
 
 export class PhotographersService {
     constructor(data) {
@@ -26,6 +27,7 @@ export class PhotographersService {
             getMediasDOM: () => this._getMediasDOM(),
             getCounterDOM: () => this._getCounterDOM(),
             getCarousselDOM: () => this._getCarousselDOM(),
+            getFilterDOM: () => this._getFilter(),
         };
     }
 
@@ -71,5 +73,9 @@ export class PhotographersService {
 
     _getCarousselDOM() {
         return this._caroussel.buildCaroussel();
+    }
+
+    _getFilter() {
+        return new FiltersService();
     }
 }
