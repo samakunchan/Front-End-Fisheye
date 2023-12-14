@@ -70,13 +70,15 @@
 }
 
 .show-arrows {
-    background: url('../../assets/icons/arrow-down.svg');
+    /*background: url('../../assets/icons/arrow-down.svg');*/
+    background: url('/assets/icons/arrow-down.svg');
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
 .hide-arrows {
-    background: url('../../assets/icons/arrow-up.svg');
+    /*background: url('../../assets/icons/arrow-up.svg');*/
+    background: url('/assets/icons/arrow-up.svg');
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
