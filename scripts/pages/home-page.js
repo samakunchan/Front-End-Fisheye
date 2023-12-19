@@ -2,6 +2,7 @@ import { errorMessage, typeStringText, typeObjectText, errorInitMessage, fakeTyp
 import { PhotographerFactory } from '../core/factories/photographer-factory.js';
 import { PhotographersService } from '../services/photographers-service.js';
 import { PhotographerRepositoryFactory } from '../core/factories/photographer-repository-factory.js';
+import { HeaderComponent } from './components/header-component.js';
 
 export class HomePage {
     constructor() {
@@ -15,6 +16,13 @@ export class HomePage {
     async init() {
         const exempleJSON = await new PhotographerRepositoryFactory(fakeTypeText);
         const remoteJSON =  await new PhotographerRepositoryFactory(realTypeText);
+
+        const headerTemplate = new HeaderComponent();
+        const logoHeader = headerTemplate.headerTemplate();
+        document.querySelector('.header').insertBefore(
+            logoHeader.getLogoDOM(),
+            document.querySelector('.h1')
+        );
 
         if(typeof remoteJSON === typeStringText && remoteJSON === errorMessage) {
             const fakePhotographers = exempleJSON['photographers'].map(PhotographerFactory.mapWithFakeModelFactory);

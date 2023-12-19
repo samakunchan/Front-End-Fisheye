@@ -11,6 +11,14 @@ export class ContactComponent {
     listenModal() {
         document.getElementById('openModal').addEventListener('click', this._displayModal);
         document.getElementById('closeModal').addEventListener('click', this._closeModal);
+        document.getElementById('form').addEventListener('submit', event => {
+            event.preventDefault();
+            this._closeModal();
+        });
+        document.querySelector('.modal').addEventListener('keydown', event => {
+            console.log(event.key);
+            if (event.key === 'Escape') this._closeModal();
+        });
     }
 
     /**
@@ -19,6 +27,7 @@ export class ContactComponent {
      */
     _displayModal () {
         document.getElementById('contactModal').style.display = 'block';
+        document.getElementById('firstname').focus();
     }
 
     /**
@@ -30,13 +39,13 @@ export class ContactComponent {
     }
 
     /**
-     * <button id="openModal" class="contact_button">Contactez-moi</button>
+     * <button id="openModal" class="contact-button">Contactez-moi</button>
      * @return {HTMLButtonElement}
      */
     getContactBtn() {
         const btnContact = document.createElement('button');
         btnContact.id = 'openModal';
-        btnContact.classList.add('contact_button');
+        btnContact.classList.add('contact-button');
         btnContact.textContent = 'Contactez-moi';
 
         return btnContact;

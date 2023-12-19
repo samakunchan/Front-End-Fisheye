@@ -29,7 +29,14 @@ export class PhotographerModel extends AbstractPhotographerModel  {
      * @return {string}
      */
     get price () {
-        return `${this._price}€/jour`;
+        return `${this._price}€ / jour`;
+    }
+
+    /**
+     * @return {string}
+     */
+    get ariaPrice () {
+        return `${this._price}€ par jour`;
     }
 
     /**
