@@ -2,11 +2,12 @@ import { redirectToThisUrl } from '../../utils/utils.js';
 
 export class PhotographCardComponent {
     constructor(data) {
-        const { id, name, portrait, tagline, price, location } = data;
+        const { id, name, portrait, tagline, price, location, ariaPrice } = data;
         this._id = id;
         this._name = name;
         this._tagline = tagline;
         this._price = price;
+        this._ariaPrice = ariaPrice;
         this._picture = portrait;
         this._location = location;
     }
@@ -19,6 +20,7 @@ export class PhotographCardComponent {
         const anchor = document.createElement( 'a');
         anchor.href = `${redirectToThisUrl('photographer')}?id=${this._id}`;
         anchor.classList.add('photographer-anchor');
+        anchor.setAttribute('aria-label', `${this._name}. Habite à ${this._location}. Prix de la prestation : ${this._ariaPrice}`);
 
         return anchor;
     }
@@ -31,12 +33,12 @@ export class PhotographCardComponent {
         const article = document.createElement( 'article');
 
         const img = this.getImage();
-        console.log(img);
         const h2 = this.getTitle();
-        const paraLocation = this.getLocation();
+        const paraLocation = this.getLocation('p');
         const paraDescription = this.getDescription();
         const small = this.getPrice();
 
+        img.setAttribute('aria-hidden', 'true');
         article.appendChild(img);
         article.appendChild(h2);
 
@@ -54,16 +56,16 @@ export class PhotographCardComponent {
     }
 
     getUserInfo() {
-        const article = document.createElement( 'article');
+        const div = document.createElement( 'div');
         const h2 = this.getTitle();
-        const paraLocation = this.getLocation();
+        const paraLocation = this.getLocation('h3');
         const paraDescription = this.getDescription();
 
-        article.appendChild(h2);
-        article.appendChild(paraLocation);
-        article.appendChild(paraDescription);
+        div.appendChild(h2);
+        div.appendChild(paraLocation);
+        div.appendChild(paraDescription);
 
-        return article;
+        return div;
     }
 
     /**
@@ -83,21 +85,22 @@ export class PhotographCardComponent {
      * @return {HTMLHeadingElement}
      */
     getTitle() {
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = this._name;
-        h2.classList.add('photographer-title');
+        const heading = document.createElement( 'h2');
+        heading.textContent = this._name;
+        heading.classList.add('photographer-title');
 
-        return h2;
+        return heading;
     }
 
     /**
      * Créer un paragraphe de description
-     * @return {HTMLParagraphElement}
+     * @return {HTMLHeadingElement | HTMLParagraphElement}
      */
-    getLocation() {
-        const para = document.createElement( 'p' );
+    getLocation(tag) {
+        const para = document.createElement( tag);
         para.textContent = this._location;
         para.classList.add('photographer-location');
+        para.setAttribute('aria-hidden', 'true');
 
         return para;
     }
@@ -110,6 +113,7 @@ export class PhotographCardComponent {
         const para = document.createElement( 'p' );
         para.textContent = this._tagline;
         para.classList.add('photographer-description');
+        para.setAttribute('aria-hidden', 'true');
 
         return para;
     }
@@ -122,6 +126,7 @@ export class PhotographCardComponent {
         const small = document.createElement( 'small' );
         small.textContent = this._price;
         small.classList.add('photographer-price');
+        small.setAttribute('aria-hidden', 'true');
 
         return small;
     }

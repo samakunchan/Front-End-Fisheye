@@ -14,9 +14,11 @@
     <title>Fisheye - photographe</title>
   </head>
   <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" alt="fisheye logo">
-    </header>
+    <!-- Header -->
+    <header class="header"></header>
+    <!-- End Header -->
+    
+    <!-- Contenu Principal -->
     <main id="main">
       <!-- Filtre -->
       <section class="photograph-filters">
@@ -32,6 +34,8 @@
       <!-- End Filtre -->
 
     </main>
+    <!-- End Contenu Principal -->
+    
     <!-- Modal Formulaire de contact -->
     <div id="contactModal">
 			<div class="modal">
@@ -39,7 +43,7 @@
           <h2 class="text-header-modal">Contactez-moi</h2>
           <img id="closeModal" src="assets/icons/close.svg" alt="Image d'une croix pour fermer le popup">
         </header>
-				<form>
+				<form id="form" action="photographer.html" method="post" aria-label="Formulaire de contact">
 					<div>
 						<label for="firstname">Prénom</label>
 						<input id="firstname" name="firstname">
@@ -56,10 +60,11 @@
             <label for="message">Votre message</label>
             <input id="message" name="message">
           </div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact-button">Envoyer</button>
 				</form>
 			</div>
 		</div>
+    
     <!-- End Modal Formulaire de contact -->
     <script type="module" src="scripts/pages/photographer-page.js"></script>
   </body>

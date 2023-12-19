@@ -7,8 +7,8 @@ export class MediasCardComponent {
     }
 
     getMediasResults() {
-        const ul = document.createElement('ul');
-        ul.classList.add('medias');
+        const div = document.createElement('div');
+        div.classList.add('medias');
         this._medias.forEach((media, indexMedia) => {
             const heart = document.createElement('i');
             heart.setAttribute('class', 'fas fa-heart fa-solid');
@@ -18,48 +18,60 @@ export class MediasCardComponent {
 
             const likes = document.createElement('small');
             likes.classList.add(`like-${indexMedia}`);
-            likes.textContent = media.likes;
+            likes.textContent = `${media.likes}   `;
 
             const blockLikes = document.createElement('div');
             blockLikes.classList.add('media-et-description');
             blockLikes.appendChild(likes);
             blockLikes.appendChild(heart);
 
-
-            const nodeMedia = media instanceof MediaVideoModel ?
-                document.createElement('video') :
-                document.createElement('img');
-            nodeMedia.alt = media.alt;
-            nodeMedia.src = media.src;
+            let nodeMedia;
+            if(media instanceof MediaVideoModel) {
+                nodeMedia = document.createElement('video');
+                const source = document.createElement('source');
+                source.src = `${media.src}#t=0.1`;
+                source.type = `video/mp4`;
+                nodeMedia.appendChild(source);
+            } else {
+                nodeMedia = document.createElement('img');
+                nodeMedia.alt = media.alt;
+                nodeMedia.src = media.src;
+            }
 
             const blockDescription = document.createElement('div');
             blockDescription.classList.add('media-et-description');
             blockDescription.appendChild(title);
             blockDescription.appendChild(blockLikes);
 
-            const li = document.createElement('li');
+            const anchor = document.createElement('a');
+            anchor.href = `javascript:void(${indexMedia})`;
+            anchor.classList.add('media-item');
+            anchor.tabIndex = 0;
+
             const item = document.createElement('div');
             item.classList.add('item');
-
-            li.classList.add('media-item');
             item.appendChild(nodeMedia);
             item.appendChild(blockDescription);
-            li.appendChild(item);
-            ul.appendChild(li);
+
+            anchor.appendChild(item);
+            div.appendChild(anchor);
 
             const caroussel = new CarousselComponent(indexMedia, this._medias);
 
             blockLikes.addEventListener('click',() => this._updateCounter(indexMedia));
             nodeMedia.addEventListener('click',() => caroussel.showCaroussel(indexMedia, this._medias));
-        })
+            anchor.addEventListener('keydown',event => {
+                if(event.key === 'Enter') caroussel.showCaroussel(indexMedia, this._medias);
+            });
+        });
 
-        return ul;
+        return div;
     }
 
     getCounterLikes() {
         const totalLikes = this._medias
-            .map(media => media.likes)
-            .reduce((a, b) => a + b, 0);
+            .map(this._mediaOnly)
+            .reduce(this._addition, 0);
 
         const heart = document.createElement('i');
         heart.setAttribute('class', 'fas fa-heart fa-solid');
@@ -71,7 +83,7 @@ export class MediasCardComponent {
         price.classList.add('price');
         price.textContent = this._medias.find(media => media.price).price;
 
-        const blockLikes = document.createElement('div');
+        const blockLikes = document.createElement('article');
         blockLikes.classList.add('like-heart');
         blockLikes.appendChild(likes);
         blockLikes.appendChild(heart);
@@ -113,6 +125,14 @@ export class MediasCardComponent {
         document.querySelector('.block-counter').appendChild(price);
         const newLikes = this._medias.find((data, index ) => index === indexMedia);
         document.querySelector(`.like-${indexMedia}`).innerText = `${newLikes.likes}`;
+    }
+
+    _mediaOnly(media) {
+        return media.likes;
+    }
+
+    _addition(a, b) {
+        return a + b;
     }
 }
 

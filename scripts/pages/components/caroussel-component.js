@@ -45,8 +45,11 @@ export class CarousselComponent {
         if(document.querySelector('.block-image-and-text')) caroussel.removeChild(document.querySelector('.block-image-and-text'));
 
         caroussel.appendChild(nodeMedia);
-        caroussel.classList.toggle('hide-caroussel');
-        document.body.classList.toggle('overflow-hidden');
+        caroussel.classList.remove('hide-caroussel');
+        if (document.querySelector('.video-caroussel')) {
+            document.querySelector('.video-caroussel').focus();
+        }
+        document.body.classList.add('overflow-hidden');
     }
 
     /**
@@ -54,8 +57,9 @@ export class CarousselComponent {
      * @private
      */
     _hideCaroussel() {
-        document.querySelector('.bloc-caroussel').classList.toggle('hide-caroussel');
-        document.body.classList.toggle('overflow-hidden');
+        document.querySelector('.bloc-caroussel').classList.add('hide-caroussel');
+        document.body.classList.remove('overflow-hidden');
+        document.getElementsByClassName('media-item')[this._count].focus(); // FINIR ça
     }
 
     /**
@@ -79,6 +83,9 @@ export class CarousselComponent {
      * @private
      */
     _previousButton(medias) {
+        if (document.querySelector('.video-caroussel')) {
+            document.querySelector('.video-caroussel').focus();
+        }
         const button = document.createElement('i');
         button.setAttribute('class', 'fas fa-chevron-left fa-solid');
         button.classList.add('previous');
@@ -94,6 +101,9 @@ export class CarousselComponent {
      * @private
      */
     _nextButton(medias) {
+        if (document.querySelector('.video-caroussel')) {
+            document.querySelector('.video-caroussel').focus();
+        }
         const button = document.createElement('i');
         button.setAttribute('class', 'fas fa-chevron-right fa-solid');
         button.classList.add('next');
@@ -155,11 +165,25 @@ export class CarousselComponent {
         blockParaTitle.classList.add('block-para-title');
         blockParaTitle.appendChild(title);
 
-        // 2. Image ou Video
-        const imageOrVideo =  medias[indexMedia] instanceof MediaVideoModel ?
-            document.createElement('video') :
-            document.createElement('img');
-        imageOrVideo.classList.add('image-caroussel');
+        let imageOrVideo;
+        if(medias[indexMedia] instanceof MediaVideoModel) {
+            imageOrVideo = document.createElement('video');
+            const source = document.createElement('source');
+            source.src = `${medias[indexMedia].src}#t=0.1`;
+            source.type = `video/mp4`;
+            imageOrVideo.appendChild(source);
+            imageOrVideo.addEventListener('keydown', event => {
+                event.preventDefault();
+                imageOrVideo.paused && event.key === 'Enter' ? imageOrVideo.play() : imageOrVideo.pause();
+            });
+        } else {
+            imageOrVideo = document.createElement('img');
+            imageOrVideo.alt = medias[indexMedia].alt;
+            imageOrVideo.src = medias[indexMedia].src;
+        }
+
+        imageOrVideo.classList.add(medias[indexMedia] instanceof MediaVideoModel ? 'video-caroussel' : 'image-caroussel');
+
         if(medias[indexMedia] instanceof MediaVideoModel) {
             const source = document.createElement('source');
             source.src = medias[indexMedia].src;
