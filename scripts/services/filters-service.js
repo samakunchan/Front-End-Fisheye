@@ -33,7 +33,7 @@ export class FiltersService {
      */
     buildDivSelectSelected(currentSelect, divSelected, select) {
         divSelected.setAttribute('class', 'select-selected');
-        divSelected.setAttribute('tabindex', '0');
+        divSelected.tabindex = 0;
         divSelected.innerHTML = currentSelect.options[currentSelect.selectedIndex].innerHTML;
 
         select.appendChild(divSelected);
@@ -57,7 +57,7 @@ export class FiltersService {
                 sameAsSelectedFilter.setAttribute('class', 'same-as-selected hidden');
                 initDone = true;
             }
-            sameAsSelectedFilter.setAttribute('tabindex', '0');
+            sameAsSelectedFilter.tabindex = 0;
 
             sameAsSelectedFilter.addEventListener('click', () => {
                 this.updateFilter(sameAsSelectedFilter, currentSelect);

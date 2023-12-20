@@ -59,7 +59,7 @@ export class CarousselComponent {
     _hideCaroussel() {
         document.querySelector('.bloc-caroussel').classList.add('hide-caroussel');
         document.body.classList.remove('overflow-hidden');
-        document.getElementsByClassName('media-item')[this._count].focus(); // FINIR ça
+        document.getElementsByClassName('media-item')[this._count ?? 0].focus(); // FINIR ça
     }
 
     /**
@@ -171,7 +171,13 @@ export class CarousselComponent {
             const source = document.createElement('source');
             source.src = `${medias[indexMedia].src}#t=0.1`;
             source.type = `video/mp4`;
+
+            const track = document.createElement('track');
+            track.kind = 'captions';
+            track.srclang = 'fr';
+            track.label = 'Français';
             imageOrVideo.appendChild(source);
+            imageOrVideo.appendChild(track);
             imageOrVideo.addEventListener('keydown', event => {
                 event.preventDefault();
                 imageOrVideo.paused && event.key === 'Enter' ? imageOrVideo.play() : imageOrVideo.pause();

@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    margin: 10px 100px;
 }
 
 .custom-select {
@@ -19,7 +20,7 @@
 }
 
 .select-selected {
-    background-color: #901C1C;
+    background-color: var(--primary-color);
     padding-left: 5% !important;
     border-radius: 5px;
     appearance: none;
@@ -35,7 +36,7 @@
 }
 
 .select-items div, .select-selected {
-    color: #ffffff;
+    color: var(--tertiary-bg-color);
     padding: 14px 0;
     cursor: pointer;
     user-select: none;
@@ -52,7 +53,7 @@
 
 .select-items {
     position: absolute;
-    background-color: #901C1C;
+    background-color: var(--primary-color);
     top: 100%;
     left: 0;
     right: 0;

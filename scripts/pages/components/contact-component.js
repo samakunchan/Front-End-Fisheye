@@ -14,9 +14,9 @@ export class ContactComponent {
         document.getElementById('form').addEventListener('submit', event => {
             event.preventDefault();
             this._closeModal();
+            console.log(Object.fromEntries([...new FormData(event.target)]));
         });
         document.querySelector('.modal').addEventListener('keydown', event => {
-            console.log(event.key);
             if (event.key === 'Escape') this._closeModal();
         });
     }
