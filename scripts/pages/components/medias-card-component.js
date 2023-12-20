@@ -12,13 +12,22 @@ export class MediasCardComponent {
         this._medias.forEach((media, indexMedia) => {
             const heart = document.createElement('i');
             heart.setAttribute('class', 'fas fa-heart fa-solid');
+            heart.setAttribute('aria-hidden', 'true');
 
             const title = document.createElement('p');
+            title.id = `descriptionId${indexMedia}`;
             title.textContent = media.title;
+            if(media instanceof MediaVideoModel) {
+                title.setAttribute('aria-label', `Titre de la video : ${media.title}.`);
+            } else {
+                title.setAttribute('aria-label', `Titre de l'image : ${media.title}.`);
+            }
 
             const likes = document.createElement('small');
+            likes.id = `likeId${indexMedia}`;
             likes.classList.add(`like-${indexMedia}`);
-            likes.textContent = `${media.likes}   `;
+            likes.textContent = `${media.likes}`;
+            likes.setAttribute('aria-label', `${media.likes} personnes aiment cette ${media instanceof MediaVideoModel ? 'video.' : 'image.'}`);
 
             const blockLikes = document.createElement('div');
             blockLikes.classList.add('media-et-description');
@@ -30,23 +39,27 @@ export class MediasCardComponent {
                 nodeMedia = document.createElement('video');
                 const source = document.createElement('source');
                 source.src = `${media.src}#t=0.1`;
+                source.title = media.alt;
                 source.type = `video/mp4`;
+
                 nodeMedia.appendChild(source);
+
             } else {
                 nodeMedia = document.createElement('img');
                 nodeMedia.alt = media.alt;
                 nodeMedia.src = media.src;
+                nodeMedia.setAttribute('aria-hidden', `true`);
             }
 
             const blockDescription = document.createElement('div');
             blockDescription.classList.add('media-et-description');
             blockDescription.appendChild(title);
             blockDescription.appendChild(blockLikes);
+            blockDescription.setAttribute('aria-labelledby', `likeId${indexMedia} descriptionId${indexMedia}`);
 
             const anchor = document.createElement('a');
             anchor.href = `javascript:void(${indexMedia})`;
             anchor.classList.add('media-item');
-            anchor.tabIndex = 0;
 
             const item = document.createElement('div');
             item.classList.add('item');
@@ -89,7 +102,8 @@ export class MediasCardComponent {
         blockLikes.appendChild(heart);
 
         const blockCounter = document.createElement('div');
-        blockCounter.classList.add('block-counter')
+        blockCounter.classList.add('block-counter');
+        blockCounter.setAttribute('aria-label', `Total des votes ${totalLikes}.`);
         blockCounter.appendChild(blockLikes);
         blockCounter.appendChild(price);
 

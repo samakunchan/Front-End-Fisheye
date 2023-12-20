@@ -20,7 +20,7 @@ export class PhotographCardComponent {
         const anchor = document.createElement( 'a');
         anchor.href = `${redirectToThisUrl('photographer')}?id=${this._id}`;
         anchor.classList.add('photographer-anchor');
-        anchor.setAttribute('aria-label', `${this._name}. Habite à ${this._location}. Prix de la prestation : ${this._ariaPrice}`);
+        anchor.setAttribute('aria-label', `${this._name}.`);
 
         return anchor;
     }
@@ -31,6 +31,8 @@ export class PhotographCardComponent {
      */
     getArticle() {
         const article = document.createElement( 'article');
+        const figure = document.createElement( 'figure');
+        figure.classList.add('figure');
 
         const img = this.getImage();
         const h2 = this.getTitle();
@@ -39,7 +41,8 @@ export class PhotographCardComponent {
         const small = this.getPrice();
 
         img.setAttribute('aria-hidden', 'true');
-        article.appendChild(img);
+        figure.appendChild(img);
+        article.appendChild(figure);
         article.appendChild(h2);
 
         if(this._location !== undefined) {
