@@ -20,7 +20,7 @@
     color: var(--primary-color);
 }
 
-.image-caroussel {
+.image-caroussel, .video-caroussel {
     width: 100%;
     object-fit: contain;
     height: 80%;
