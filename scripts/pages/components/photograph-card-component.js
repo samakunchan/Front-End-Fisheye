@@ -20,7 +20,7 @@ export class PhotographCardComponent {
         const anchor = document.createElement( 'a');
         anchor.href = `${redirectToThisUrl('photographer')}?id=${this._id}`;
         anchor.classList.add('photographer-anchor');
-        anchor.setAttribute('aria-label', `${this._name}.`);
+        anchor.setAttribute('aria-label', `${this._name}. Prix de la prestation : ${this._ariaPrice}.`);
 
         return anchor;
     }
@@ -91,6 +91,7 @@ export class PhotographCardComponent {
         const heading = document.createElement( 'h2');
         heading.textContent = this._name;
         heading.classList.add('photographer-title');
+        heading.setAttribute('aria-hidden', 'true');
 
         return heading;
     }
