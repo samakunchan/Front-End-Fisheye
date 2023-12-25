@@ -71,7 +71,6 @@ form {
 }
 
 form label {
-    color: var(--tertiary-text-color);
     font-size: 36px;
 }
 
@@ -150,9 +149,6 @@ form input {
 
 .media-et-description .media-et-description{
     cursor: pointer;
-    /*position: absolute;*/
-    /*right: 0;*/
-    /*z-index: 2;*/
 }
 
 .media-item img,
@@ -204,4 +200,5 @@ form input {
     align-items: center;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    z-index: 2;
 }

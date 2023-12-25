@@ -1,5 +1,6 @@
 export class ContactComponent {
     constructor(name = null) {
+        this._name = name;
         if(name !== null) {
             const oldText = document.querySelector('.text-header-modal').textContent;
             const newText = `${oldText} \n${name}`;
@@ -47,6 +48,7 @@ export class ContactComponent {
         btnContact.id = 'openModal';
         btnContact.classList.add('contact-button');
         btnContact.textContent = 'Contactez-moi';
+        btnContact.setAttribute('aria-label', `Contactez ${this._name}`);
 
         return btnContact;
     }

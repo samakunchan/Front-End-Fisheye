@@ -33,12 +33,10 @@ export class AbstractMediaModel {
 
 
     /**
-     *
      * @param likes
-     * @return {number}
      */
     set likes(likes) {
-        return this._likes = likes;
+        this._likes = likes
     }
 
     /**

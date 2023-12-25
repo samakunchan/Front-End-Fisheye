@@ -50,6 +50,8 @@ export class PhotographerPage {
         const hiddenH1 = document.createElement('h1');
         hiddenH1.textContent = photographer.name;
         hiddenH1.classList.add('hidden');
+        const oldTitle = document.head.getElementsByTagName('title')[0].innerText;
+        document.head.getElementsByTagName('title')[0].innerText = `${oldTitle} - ${photographer.name}`;
         const photographerTemplate = new PhotographersService(photographer).photographerTemplate();
         const photographerHeader = photographerTemplate.getSectionHeaderDOM();
         const photographerMedias = photographerTemplate.getMediasDOM();
