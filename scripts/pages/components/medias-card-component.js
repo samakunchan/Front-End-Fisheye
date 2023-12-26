@@ -4,6 +4,8 @@ import { CarousselComponent } from './caroussel-component.js';
 export class MediasCardComponent {
   constructor(medias) {
     this._medias = medias;
+    this.price = `${this._medias.find((media) => media.price).price.split('€')[0]}€ / jour`;
+    this._caroussel = new CarousselComponent();
   }
 
   getMediasResults() {
@@ -33,6 +35,8 @@ export class MediasCardComponent {
       );
 
       const blockLikes = document.createElement('div');
+      blockLikes.id = `blockLikes${indexMedia}`;
+      blockLikes.tabIndex = 0;
       blockLikes.classList.add('media-et-description');
       blockLikes.appendChild(likes);
       blockLikes.appendChild(heart);
@@ -60,8 +64,10 @@ export class MediasCardComponent {
       blockDescription.setAttribute('aria-labelledby', `likeId${indexMedia} descriptionId${indexMedia}`);
 
       const anchor = document.createElement('a');
+      anchor.id = `item${indexMedia}`;
       anchor.href = `javascript:void(${indexMedia})`;
       anchor.classList.add('media-item');
+      anchor.tabIndex = 0;
 
       const item = document.createElement('div');
       item.classList.add('item');
@@ -71,13 +77,28 @@ export class MediasCardComponent {
       anchor.appendChild(item);
       div.appendChild(anchor);
 
-      const caroussel = new CarousselComponent(indexMedia, this._medias);
-
       blockLikes.addEventListener('click', () => this._updateCounter(indexMedia));
-      nodeMedia.addEventListener('click', () => caroussel.showCaroussel(indexMedia, this._medias));
-      anchor.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') caroussel.showCaroussel(indexMedia, this._medias);
+      nodeMedia.addEventListener('click', () => this._caroussel.showCaroussel(indexMedia, this._medias));
+
+      anchor.addEventListener('focus', event => {
+        if(event.target.className === 'media-et-description') return;
+        if (event.target.className === 'media-item') {
+          anchor.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') this._caroussel.showCaroussel(indexMedia, this._medias);
+            document.querySelector('.bloc-caroussel').focus();
+          });
+        }
       });
+
+      blockLikes.addEventListener('focus', event => {
+        if (event.target.className === 'media-et-description') {
+          blockLikes.addEventListener('keydown', event => {
+            event.stopPropagation();
+            if (event.key === 'Enter' ) this._updateCounter(indexMedia);
+          });
+        }
+      });
+
     });
 
     return div;
@@ -94,7 +115,7 @@ export class MediasCardComponent {
 
     const price = document.createElement('small');
     price.classList.add('price');
-    price.textContent = this._medias.find((media) => media.price).price;
+    price.textContent = this.price;
 
     const blockLikes = document.createElement('article');
     blockLikes.classList.add('like-heart');
@@ -127,7 +148,7 @@ export class MediasCardComponent {
 
     const price = document.createElement('small');
     price.classList.add('price');
-    price.textContent = this._medias.find((media) => media.price).price;
+    price.textContent = this.price;
 
     const blockLikes = document.createElement('div');
     blockLikes.classList.add('like-heart');

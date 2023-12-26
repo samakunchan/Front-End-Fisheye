@@ -12,6 +12,7 @@ export class CarousselComponent {
   buildCaroussel() {
     const caroussel = document.createElement('div');
     caroussel.classList.add('bloc-caroussel', 'hide-caroussel');
+    caroussel.tabIndex = 0;
     caroussel.appendChild(this._getCloseCross());
 
     return caroussel;
@@ -25,9 +26,19 @@ export class CarousselComponent {
   showCaroussel(indexMedia, medias) {
     this._count = indexMedia;
     const caroussel = document.querySelector('.bloc-caroussel');
+    caroussel.focus();
+    console.log('A');
+
     const nodeMedia = this._getMedia(indexMedia, medias);
     const blockButtons = document.createElement('div');
     blockButtons.classList.add('bloc-buttons');
+
+    if (document.querySelector('.block-image-and-text')) {
+      caroussel.removeChild(document.querySelector('.block-image-and-text'));
+    }
+
+    caroussel.appendChild(nodeMedia);
+    caroussel.classList.remove('hide-caroussel');
 
     if (!document.querySelector('.previous') && !document.querySelector('.next')) {
       blockButtons.appendChild(this._previousButton(medias));
@@ -42,14 +53,6 @@ export class CarousselComponent {
       });
     }
 
-    if (document.querySelector('.block-image-and-text'))
-      caroussel.removeChild(document.querySelector('.block-image-and-text'));
-
-    caroussel.appendChild(nodeMedia);
-    caroussel.classList.remove('hide-caroussel');
-    if (document.querySelector('.video-caroussel')) {
-      document.querySelector('.video-caroussel').focus();
-    }
     document.body.classList.add('overflow-hidden');
   }
 
@@ -60,7 +63,7 @@ export class CarousselComponent {
   _hideCaroussel() {
     document.querySelector('.bloc-caroussel').classList.add('hide-caroussel');
     document.body.classList.remove('overflow-hidden');
-    document.getElementsByClassName('media-item')[this._count ?? 0].focus(); // FINIR ça
+    document.getElementsByClassName('media-item')[this._count ?? 0].focus();
   }
 
   /**
@@ -84,13 +87,17 @@ export class CarousselComponent {
    * @private
    */
   _previousButton(medias) {
-    if (document.querySelector('.video-caroussel')) {
-      document.querySelector('.video-caroussel').focus();
-    }
     const button = document.createElement('i');
     button.setAttribute('class', 'fas fa-chevron-left fa-solid');
     button.classList.add('previous');
-    button.addEventListener('click', () => this._previousEvent(medias));
+    button.tabIndex = 0;
+    button.addEventListener('click', () => {
+      this._previousEvent(medias);
+    });
+    button.addEventListener('keydown', event => {
+      event.stopPropagation();
+      if (event.key === 'Enter') this._previousEvent(medias);
+    });
 
     return button;
   }
@@ -102,13 +109,15 @@ export class CarousselComponent {
    * @private
    */
   _nextButton(medias) {
-    if (document.querySelector('.video-caroussel')) {
-      document.querySelector('.video-caroussel').focus();
-    }
     const button = document.createElement('i');
     button.setAttribute('class', 'fas fa-chevron-right fa-solid');
     button.classList.add('next');
+    button.tabIndex = 0;
     button.addEventListener('click', () => this._nextEvent(medias));
+    button.addEventListener('keydown', event => {
+      event.stopPropagation();
+      if (event.key === 'Enter') this._nextEvent(medias);
+    });
 
     return button;
   }
@@ -178,10 +187,10 @@ export class CarousselComponent {
       track.label = 'Français';
       imageOrVideo.appendChild(source);
       imageOrVideo.appendChild(track);
-      imageOrVideo.addEventListener('keydown', (event) => {
-        event.preventDefault();
-        imageOrVideo.paused && event.key === 'Enter' ? imageOrVideo.play() : imageOrVideo.pause();
-      });
+      // imageOrVideo.addEventListener('keydown', (event) => {
+      //   // event.preventDefault();
+      //   imageOrVideo.paused && event.key === 'Enter' ? imageOrVideo.play() : imageOrVideo.pause();
+      // });
     } else {
       imageOrVideo = document.createElement('img');
       imageOrVideo.alt = medias[indexMedia].alt;
@@ -200,6 +209,7 @@ export class CarousselComponent {
       imageOrVideo.src = medias[indexMedia].src;
       imageOrVideo.alt = medias[indexMedia].alt;
     }
+    imageOrVideo.tabIndex = 0;
 
     // 2. Div qui va contenir l'image ou la video
     const blockMedia = document.createElement('div');
