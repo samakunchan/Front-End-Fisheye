@@ -7,9 +7,13 @@
   "author": "samakunchan",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint \"{css,scripts}/**/*.js\" --fix"
+    "lint": "eslint \"{css,scripts}/**/*.js\" --fix",
+    "format": "prettier --write \"scripts/**/*.js\""
   },
   "dependencies": {
-    "eslint": "^8.56.0"
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.3.2"
   }
 }
