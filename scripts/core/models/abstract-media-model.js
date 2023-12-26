@@ -53,10 +53,10 @@ export class AbstractMediaModel {
   }
 
   /**
-   * @return {number}
+   * @return {string}
    */
   get price() {
-    return this._price;
+    return `${this._price}€ / jour`;
   }
 
   /**
